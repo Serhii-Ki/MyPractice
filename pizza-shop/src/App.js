@@ -54,7 +54,7 @@ function App() {
                   <i>2</i>
                 </div>
               </div>
-            </div>{' '}
+            </div>
             <div class="pizza-block">
               <img
                 class="pizza-block__image"
