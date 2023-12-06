@@ -4,6 +4,8 @@ function Sort() {
     const [open, setOpen ] = React.useState(false);
     const [sortValue, setSortValue] = React.useState('популярности');
 
+    const list = ['популярности', 'цене', 'алфавиту'];
+
     return (
         <div className="sort">
             <div className="sort__label">
@@ -24,26 +26,16 @@ function Sort() {
             {open && (
                 <div className="sort__popup">
                     <ul>
-                        <li onClick={() => {
-                            setSortValue('популярности');
-                            setOpen(false);
-                        }}
-                            className={sortValue === 'популярности'? 'active' : ''}
-                        >популярности</li>
-                        <li
-                            onClick={() => {
-                                setSortValue('цене');
-                                setOpen(false);
-                            }}
-                            className={sortValue === 'цене'? 'active' : ''}
-                        >цене</li>
-                        <li
-                            onClick={() => {
-                                setSortValue('алфавиту');
-                                setOpen(false);
-                            }}
-                            className={sortValue === 'алфавиту'? 'active' : ''}
-                        >алфавиту</li>
+                        {list.map((item, index) => (
+                            <li
+                                key={index}
+                                className={sortValue === item ? 'active' : ''}
+                                onClick={() => {
+                                    setSortValue(item);
+                                    setOpen(false);
+                                }}
+                            >{item}</li>
+                        ))}
                     </ul>
                 </div>
             )}
