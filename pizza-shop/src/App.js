@@ -9,6 +9,14 @@ import pizzas from './assets/pizzas.json';
 import './scss/app.scss';
 
 function App() {
+    const [items, setItems] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('https://6572056dd61ba6fcc0143cae.mockapi.io/items')
+            .then(res => res.json())
+            .then(data => setItems(data));
+    }, []);
+
     return (
         <div className="wrapper">
             <Header/>
@@ -20,7 +28,7 @@ function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        {pizzas.map(pizza => <PizzaBlock key={pizza.id} {...pizza}/>)}
+                        {items.map(pizza => <PizzaBlock key={pizza.id} {...pizza}/>)}
                     </div>
                 </div>
             </div>
