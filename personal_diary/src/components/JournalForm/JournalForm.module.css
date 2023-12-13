@@ -1,0 +1,31 @@
+.journal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.input-title {
+    border: none;
+    background: none;
+    font-size: 32px;
+    font-weight: 600;
+    border-bottom: 1px solid #424040;
+    width: 130%;
+}
+
+.input-form {
+    border: none;
+    background: none;
+    width: 130%;
+    border-bottom: 1px solid #424040;
+}
+
+.form-textarea {
+    width: 150%;
+    background: none;
+    height: 300px;
+}
+
+.invalid {
+    border: 1px solid red;
+}

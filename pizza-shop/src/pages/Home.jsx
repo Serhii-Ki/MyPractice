@@ -1,22 +1,25 @@
 import React from 'react';
+import {useSelector, useDispatch} from "react-redux";
 
+import {setCategoryId} from "../redux/slices/filterSlice";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 
 function Home(props) {
+    const categoryId = useSelector(state => state.filter.categoryId);
+    const sortType = useSelector(state => state.filter.sort);
+    const dispatch = useDispatch();
+
     const [items, setItems] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [categoryId, setCategoryId] = React.useState(0);
-    const [sortType, setSortType] = React.useState({name: 'популярности', sort: 'rating'});
 
     React.useEffect(() => {
         setIsLoading(true);
         fetch(
             `https://6572056dd61ba6fcc0143cae.mockapi.io/items?
-            ${categoryId ? `category=${categoryId}` : ''
-            }&sortBy=${sortType.sort}&order=desc`
+            ${categoryId ? `category=${categoryId}` : ''}&sortBy=${sortType.sort}&order=desc`
         )
             .then(res => res.json())
             .then(data => {
@@ -27,18 +30,16 @@ function Home(props) {
     }, [categoryId, sortType]);
 
     const onClickCategory = (id) => {
-        setCategoryId(id);
+        dispatch(setCategoryId(id));
+        console.log(categoryId);
     };
 
-    const onClickSort = (type) => {
-        setSortType(type);
-    };
 
     return (
         <container>
             <div className="content__top">
                 <Categories value={categoryId} onClickCategory={(id)=>onClickCategory(id)}/>
-                <Sort value={sortType.name} onClickSort={(type) => onClickSort(type)}/>
+                <Sort />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
